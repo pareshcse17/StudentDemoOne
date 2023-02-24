@@ -1,8 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.primary.service;
 
 import java.util.List;
 
-import com.example.demo.pojo.StudentBasicDetails;
+import com.example.demo.primary.pojo.StudentBasicDetails;
 
 public interface StudentBasicDetailsService {
 	

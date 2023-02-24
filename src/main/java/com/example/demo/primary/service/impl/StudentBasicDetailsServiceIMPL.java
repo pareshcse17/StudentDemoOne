@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.primary.service.impl;
 
 import java.util.List;
 
@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.pojo.StudentBasicDetails;
-import com.example.demo.repo.StudentBasicDetailsRepo;
+import com.example.demo.primary.pojo.StudentBasicDetails;
+import com.example.demo.primary.repo.StudentBasicDetailsRepo;
+import com.example.demo.primary.service.StudentBasicDetailsService;
 
 @Service
 public class StudentBasicDetailsServiceIMPL implements StudentBasicDetailsService {

@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.primary.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.pojo.StudentBasicDetails;
-import com.example.demo.service.StudentBasicDetailsService;
+import com.example.demo.primary.pojo.StudentBasicDetails;
+import com.example.demo.primary.service.StudentBasicDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @CrossOrigin
