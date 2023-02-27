@@ -6,7 +6,7 @@ import com.example.demo.primary.pojo.StudentBasicDetails;
 
 public interface StudentBasicDetailsService {
 	
-	StudentBasicDetails findStudentByRollNoService(String rollNo);
+	StudentBasicDetails findStudentByRollNoService(String roll_no);
 	
 	List<StudentBasicDetails> findStudentByNameService(String name);
 	

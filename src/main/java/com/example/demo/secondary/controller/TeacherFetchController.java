@@ -1,6 +1,8 @@
 package com.example.demo.secondary.controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -22,7 +24,7 @@ import com.example.demo.secondary.service.TeacherService;
 @Controller
 @RequestMapping(value = "/teacherMap/")
 public class TeacherFetchController {
-	
+
 	public TeacherFetchController() {
 		// TODO Auto-generated constructor stub
 		System.out.println("TeacherFetchController controller ...");
@@ -30,74 +32,93 @@ public class TeacherFetchController {
 
 	@Autowired
 	public TeacherService teacherService;
-	
+
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "greet")
 	public String greetTeacher() {
 		return "welcome teacher TeacherFetchController";
 	}
-	
+
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "getAllTeachers")
-	public List<Teacher> getAllTeachers(){
-		try {return teacherService.findAllTeachers();}
-		catch(Exception e) {
+	public List<Teacher> getAllTeachers() {
+		try {
+			return teacherService.findAllTeachers();
+		} catch (Exception e) {
 			System.err.println("exceptin occured " + e);
 		}
 		return null;
 	}
-	
+
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "greetStudent")
 	public String greetStudent() {
-		
-		String url = "http://localhost:8081/studFetch/welcome";
-		RestTemplate restTemplate = new RestTemplate();
-		return restTemplate.getForObject(url, String.class);
+
+		try {
+			String url = "http://localhost:8081/studFetch/welcome";
+			RestTemplate restTemplate = new RestTemplate();
+			return restTemplate.getForObject(url, String.class);
+		}
+		catch(Exception e) {
+			System.out.println("exception occured" + e);
+		}
+		return null;
 	}
-	
+
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "getAllStudents")
 	public List<StudentBasicDetails> getAllStudent() {
-		
-		String url = "http://localhost:8081/studFetch/getAllStud";
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<List<StudentBasicDetails>> response = 
-				restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<StudentBasicDetails>>() {
-		});
-		List<StudentBasicDetails> students = response.getBody();
-		return students;
+
+		try {
+			String url = "http://localhost:8081/studFetch/getAllStud";
+			RestTemplate restTemplate = new RestTemplate();
+			ResponseEntity<List<StudentBasicDetails>> response = restTemplate.exchange(url, HttpMethod.GET, null,
+					new ParameterizedTypeReference<List<StudentBasicDetails>>() {
+					});
+			List<StudentBasicDetails> students = response.getBody();
+			return students;
+		} catch (Exception e) {
+			System.out.println("exception occured" + e);
+		}
+		return null;
 	}
-	
+
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "getStudentByName/{name}")
 	public List<StudentBasicDetails> getStudentByName(@PathVariable String name) {
-		
-		String url = "http://localhost:8081/studFetch/getStudByName/{name}";
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<List<StudentBasicDetails>> response = 
-				restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<StudentBasicDetails>>() {
-		});
-		List<StudentBasicDetails> students = response.getBody();
-		return students;
+
+		try {
+			String url = "http://localhost:8081/studFetch/getStudByName/{name}";
+			RestTemplate restTemplate = new RestTemplate();
+			ResponseEntity<List<StudentBasicDetails>> response = restTemplate.exchange(url, HttpMethod.GET, null,
+					new ParameterizedTypeReference<List<StudentBasicDetails>>() {
+					}, name);
+			List<StudentBasicDetails> students = response.getBody();
+			return students;
+		} catch (Exception e) {
+			System.out.println("exception occured" + e);
+		}
+		return null;
 	}
-	
+
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "getStudentByRollNo/{rollNo}")
-	public List<StudentBasicDetails> getStudentByRollNo(@PathVariable String rollNo) {
-		
-		String url = "http://localhost:8081/studFetch/getStudByRoll/{rollNo}";
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<List<StudentBasicDetails>> response = 
-				restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<StudentBasicDetails>>() {
-		});
-		List<StudentBasicDetails> students = response.getBody();
-		return students;
+	public StudentBasicDetails getStudentByRollNo(@PathVariable String rollNo) {
+
+		System.out.println("inside getStudentByRollNo rest client method ...");
+		try {
+			String url = "http://localhost:8081/studFetch/getStudByRoll/{rollNo}";
+			RestTemplate restTemplate = new RestTemplate();
+			return restTemplate.getForObject(url, StudentBasicDetails.class, rollNo);
+		} catch (Exception e) {
+			System.out.println("exception occured" + e);
+		}
+		return null;
 	}
 }

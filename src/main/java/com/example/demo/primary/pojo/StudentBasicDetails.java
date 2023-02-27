@@ -2,6 +2,7 @@ package com.example.demo.primary.pojo;
 
 import java.util.List;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,7 +11,8 @@ public class StudentBasicDetails {
 
 	@Id
 	private String id;
-	private String roll_no;
+	@BsonProperty(value = "roll_no")
+	private String rollNo;
 	private String name;
 	private String address;
 	private long rank;
@@ -20,11 +22,11 @@ public class StudentBasicDetails {
 		super();
 	}
 
-	public StudentBasicDetails(String id, String roll_no, String name, String address, long rank,
+	public StudentBasicDetails(String id, String rollNo, String name, String address, long rank,
 			List<String> subjects) {
 		super();
 		this.id = id;
-		this.roll_no = roll_no;
+		this.rollNo = rollNo;
 		this.name = name;
 		this.address = address;
 		this.rank = rank;
@@ -40,11 +42,11 @@ public class StudentBasicDetails {
 	}
 
 	public String getRollNo() {
-		return roll_no;
+		return rollNo;
 	}
 
 	public void setRollNo(String rollNo) {
-		this.roll_no = rollNo;
+		this.rollNo = rollNo;
 	}
 
 	public String getName() {
@@ -81,7 +83,7 @@ public class StudentBasicDetails {
 
 	@Override
 	public String toString() {
-		return "StudentBasicDetails [rollNo=" + roll_no + ", name=" + name + ", address=" + address + ", rank=" + rank
+		return "StudentBasicDetails [rollNo=" + rollNo + ", name=" + name + ", address=" + address + ", rank=" + rank
 				+ ", subjects=" + subjects + "]";
 	}
 
