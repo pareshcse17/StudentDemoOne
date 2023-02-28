@@ -41,7 +41,8 @@ public class StudentBasicDetailsJPA {
 		try {
 			return studentBasicDetailsService.findStudentByRollNoService(rollNo);
 		} catch (Exception e) {
-			log.error("Exception caught" + e.toString());
+			log.error("Exception caught");
+			e.printStackTrace();
 		}
 
 		return null;
@@ -56,7 +57,8 @@ public class StudentBasicDetailsJPA {
 		try {
 			return studentBasicDetailsService.findStudentByNameService(name);
 		} catch (Exception e) {
-			log.error("Exception caught" + e.toString());
+			log.error("Exception caught");
+			e.printStackTrace();
 		}
 
 		return null;
@@ -71,7 +73,8 @@ public class StudentBasicDetailsJPA {
 		try {
 			return studentBasicDetailsService.findStudentByTeacherIdService(teacherId);
 		} catch (Exception e) {
-			log.error(e.toString());
+			log.error("exception caught");
+			e.printStackTrace();
 		}
 
 		return null;
@@ -87,7 +90,8 @@ public class StudentBasicDetailsJPA {
 		try {
 			return studentBasicDetailsService.findAllStudentsService();
 		} catch (Exception e) {
-			log.error("Exception caught" + e.toString());
+			log.error("Exception caught");
+			e.printStackTrace();
 		}
 
 		return null;
