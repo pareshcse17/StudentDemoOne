@@ -19,17 +19,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/studFetch/")
 public class StudentBasicDetailsJPA {
 
-	
 	@Autowired
 	private StudentBasicDetailsService studentBasicDetailsService;
-	
+
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "welcome")
 	String welcomeStudent() {
 		return "Welcome Student fetch";
 	}
-	
+
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "getStudByRoll/{rollNo}")
@@ -37,12 +36,14 @@ public class StudentBasicDetailsJPA {
 		System.out.println("inside getStudByRollController method");
 		try {
 			return studentBasicDetailsService.findStudentByRollNoService(rollNo);
-		}catch(Exception e) {System.out.println("Exception caught" + e);}
-		
+		} catch (Exception e) {
+			System.out.println("Exception caught" + e);
+		}
+
 		return null;
-		
+
 	}
-	
+
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "getStudByName/{name}")
@@ -50,23 +51,42 @@ public class StudentBasicDetailsJPA {
 		System.out.println("inside getStudByNameController method");
 		try {
 			return studentBasicDetailsService.findStudentByNameService(name);
-		}catch(Exception e) {System.out.println("Exception caught" + e);}
-		
+		} catch (Exception e) {
+			System.out.println("Exception caught" + e);
+		}
+
 		return null;
-		
+
 	}
-	
+
+	@GetMapping
+	@ResponseBody
+	@RequestMapping(value = "getStudByTeacherId/{teacherId}")
+	public List<StudentBasicDetails> getStudByteacherIdController(@PathVariable String teacherId) {
+		System.out.println("inside getStudByteacherIdController method");
+		try {
+			return studentBasicDetailsService.findStudentByTeacherIdService(teacherId);
+		} catch (Exception e) {
+			System.out.println("Exception caught" + e);
+		}
+
+		return null;
+
+	}
+
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "getAllStud")
 	public List<StudentBasicDetails> getAllStudentController() {
 		System.out.println("inside getAllStudentController method");
-		
+
 		try {
 			return studentBasicDetailsService.findAllStudentsService();
-		}catch(Exception e) {System.out.println("Exception caught" + e);}
-		
+		} catch (Exception e) {
+			System.out.println("Exception caught" + e);
+		}
+
 		return null;
-		
+
 	}
 }

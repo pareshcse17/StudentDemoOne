@@ -2,31 +2,34 @@ package com.example.demo.secondary.pojo;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.example.demo.primary.pojo.StudentBasicDetails;
+
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
-@Document
+@Document(collection = "teachers")
 public class Teacher {
 
 	@Id
 	private String Id;
-	private String teacherId;
+	private String teacherID;
 	private String name;
 	private String address;
 	private List<String> subjects;
 	private long age;
 	private long salary;
+	private List<StudentBasicDetails> students;
 
 	public Teacher() {
 		super();
 	}
 
-	public Teacher(String id, String teacherId, String name, String address, List<String> subjects, long age,
+	public Teacher(String id, String teacherID, String name, String address, List<String> subjects, long age,
 			long salary) {
 		super();
 		Id = id;
-		this.teacherId = teacherId;
+		this.teacherID = teacherID;
 		this.name = name;
 		this.address = address;
 		this.subjects = subjects;
@@ -42,12 +45,12 @@ public class Teacher {
 		Id = id;
 	}
 
-	public String getTeacherId() {
-		return teacherId;
+	public String getteacherID() {
+		return teacherID;
 	}
 
-	public void setTeacherId(String teacherId) {
-		this.teacherId = teacherId;
+	public void setteacherID(String teacherID) {
+		this.teacherID = teacherID;
 	}
 
 	public String getName() {
@@ -89,11 +92,20 @@ public class Teacher {
 	public void setSalary(long salary) {
 		this.salary = salary;
 	}
+	
+	public List<StudentBasicDetails> getStudents() {
+		return students;
+	}
+
+	public void setStudents(List<StudentBasicDetails> students) {
+		this.students = students;
+	}
 
 	@Override
 	public String toString() {
-		return "Teacher [Id=" + Id + ", teacherId=" + teacherId + ", name=" + name + ", address=" + address
+		return "Teacher [Id=" + Id + ", teacherID=" + teacherID + ", name=" + name + ", address=" + address
 				+ ", subjects=" + subjects + ", age=" + age + ", salary=" + salary + "]";
 	}
+
 
 }

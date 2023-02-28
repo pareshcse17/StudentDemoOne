@@ -13,5 +13,7 @@ public interface StudentBasicDetailsRepo extends MongoRepository<StudentBasicDet
 	
 	List<StudentBasicDetails> findStudentByName(String name);
 	
+	List<StudentBasicDetails> findStudentByTeacherId(String teacherId);
+	
  }
 

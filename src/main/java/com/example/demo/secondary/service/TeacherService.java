@@ -6,8 +6,8 @@ import com.example.demo.secondary.pojo.Teacher;
 
 public interface TeacherService {
 
-	public List<Teacher> findAllTeachers();
-	public List<Teacher> findTeachersByName(String name);
-	public List<Teacher> findTeacherByTeacherId(String teacherId);
+	public List<Teacher> findAllTeachersService();
+	public List<Teacher> findTeachersByNameService(String name);
+	public Teacher findTeacherByTeacherIDService(String teacherID);
 	
 }

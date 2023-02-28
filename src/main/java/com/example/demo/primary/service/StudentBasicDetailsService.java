@@ -10,6 +10,8 @@ public interface StudentBasicDetailsService {
 	
 	List<StudentBasicDetails> findStudentByNameService(String name);
 	
+	List<StudentBasicDetails> findStudentByTeacherIdService(String teacherId);
+	
 	List<StudentBasicDetails> findAllStudentsService();
 	
 

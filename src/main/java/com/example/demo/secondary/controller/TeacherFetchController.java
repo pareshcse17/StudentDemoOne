@@ -4,6 +4,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.primary.pojo.StudentBasicDetails;
+import com.example.demo.primary.service.impl.StudentBasicDetailsServiceIMPL;
 import com.example.demo.secondary.pojo.Teacher;
 import com.example.demo.secondary.service.TeacherService;
 
@@ -25,9 +29,11 @@ import com.example.demo.secondary.service.TeacherService;
 @RequestMapping(value = "/teacherMap/")
 public class TeacherFetchController {
 
+	final Logger log = LoggerFactory.getLogger(TeacherFetchController.class);
+
 	public TeacherFetchController() {
 		// TODO Auto-generated constructor stub
-		System.out.println("TeacherFetchController controller ...");
+		log.info("TeacherFetchController controller ...");
 	}
 
 	@Autowired
@@ -37,17 +43,50 @@ public class TeacherFetchController {
 	@ResponseBody
 	@RequestMapping(value = "greet")
 	public String greetTeacher() {
-		return "welcome teacher TeacherFetchController";
+		try {
+			return "welcome teacher TeacherFetchController";
+		} catch (Exception e) {
+			log.error("message " + e.toString());
+		}
+		return null;
 	}
 
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "getAllTeachers")
-	public List<Teacher> getAllTeachers() {
+	public List<Teacher> getAllTeachersController() {
+		log.debug("inside getAllTeachersController ...");
 		try {
-			return teacherService.findAllTeachers();
+			return teacherService.findAllTeachersService();
 		} catch (Exception e) {
-			System.err.println("exceptin occured " + e);
+			log.error("message " + e.toString());
+		}
+		return null;
+	}
+
+	@GetMapping
+	@ResponseBody
+	@RequestMapping(value = "getTeachersByName/{name}")
+	public List<Teacher> getTeachersByNameController(@PathVariable String name) {
+		log.debug("inside getTeachersByNameController ...");
+		try {
+			return teacherService.findTeachersByNameService(name);
+		} catch (Exception e) {
+			log.error("message " + e.toString());
+		}
+		return null;
+	}
+
+	@GetMapping
+	@ResponseBody
+	@RequestMapping(value = "getTeachersByTeacherID/{teacherID}")
+	public Teacher getTeachersByTeacherIDController(@PathVariable String teacherID) {
+		
+		log.debug("inside getTeachersByTeacherIDController ...");
+		try {
+			return teacherService.findTeacherByTeacherIDService(teacherID);
+		} catch (Exception e) {
+			log.error("message " + e.toString());
 		}
 		return null;
 	}
@@ -61,8 +100,7 @@ public class TeacherFetchController {
 			String url = "http://localhost:8081/studFetch/welcome";
 			RestTemplate restTemplate = new RestTemplate();
 			return restTemplate.getForObject(url, String.class);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("exception occured" + e);
 		}
 		return null;
@@ -71,8 +109,9 @@ public class TeacherFetchController {
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "getAllStudents")
-	public List<StudentBasicDetails> getAllStudent() {
+	public List<StudentBasicDetails> getAllStudentController() {
 
+		log.debug("inside getAllStudentsController ...");
 		try {
 			String url = "http://localhost:8081/studFetch/getAllStud";
 			RestTemplate restTemplate = new RestTemplate();
@@ -90,8 +129,9 @@ public class TeacherFetchController {
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "getStudentByName/{name}")
-	public List<StudentBasicDetails> getStudentByName(@PathVariable String name) {
+	public List<StudentBasicDetails> getStudentsByNameController(@PathVariable String name) {
 
+		log.debug("inside getStudentsByNameController ...");
 		try {
 			String url = "http://localhost:8081/studFetch/getStudByName/{name}";
 			RestTemplate restTemplate = new RestTemplate();
@@ -109,8 +149,9 @@ public class TeacherFetchController {
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value = "getStudentByRollNo/{rollNo}")
-	public StudentBasicDetails getStudentByRollNo(@PathVariable String rollNo) {
+	public StudentBasicDetails getStudentByRollNoController(@PathVariable String rollNo) {
 
+		log.debug("inside getTeachersByRollNoController ...");
 		System.out.println("inside getStudentByRollNo rest client method ...");
 		try {
 			String url = "http://localhost:8081/studFetch/getStudByRoll/{rollNo}";

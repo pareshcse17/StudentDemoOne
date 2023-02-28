@@ -9,6 +9,6 @@ import com.example.demo.secondary.pojo.Teacher;
 public interface TeacherRepository extends MongoRepository<Teacher, String>{
 	
 	public List<Teacher> findTeachersByName(String name);
-	public List<Teacher> findTeachersByTeacherId(String teacherId);
+	public Teacher findTeachersByTeacherID(String teacherID);
 
 }
