@@ -2,6 +2,8 @@ package com.example.demo.primary.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 @RequestMapping("/studFetch/")
 public class StudentBasicDetailsJPA {
+	
+	final Logger log = LoggerFactory.getLogger(StudentBasicDetailsJPA.class);
 
 	@Autowired
 	private StudentBasicDetailsService studentBasicDetailsService;
@@ -33,11 +37,11 @@ public class StudentBasicDetailsJPA {
 	@ResponseBody
 	@RequestMapping(value = "getStudByRoll/{rollNo}")
 	public StudentBasicDetails getStudByRollController(@PathVariable String rollNo) {
-		System.out.println("inside getStudByRollController method");
+		log.info("inside getStudByRollController method");
 		try {
 			return studentBasicDetailsService.findStudentByRollNoService(rollNo);
 		} catch (Exception e) {
-			System.out.println("Exception caught" + e);
+			log.error("Exception caught" + e.toString());
 		}
 
 		return null;
@@ -48,11 +52,11 @@ public class StudentBasicDetailsJPA {
 	@ResponseBody
 	@RequestMapping(value = "getStudByName/{name}")
 	public List<StudentBasicDetails> getStudByNameController(@PathVariable String name) {
-		System.out.println("inside getStudByNameController method");
+		log.info("inside getStudByNameController method");
 		try {
 			return studentBasicDetailsService.findStudentByNameService(name);
 		} catch (Exception e) {
-			System.out.println("Exception caught" + e);
+			log.error("Exception caught" + e.toString());
 		}
 
 		return null;
@@ -63,11 +67,11 @@ public class StudentBasicDetailsJPA {
 	@ResponseBody
 	@RequestMapping(value = "getStudByTeacherId/{teacherId}")
 	public List<StudentBasicDetails> getStudByteacherIdController(@PathVariable String teacherId) {
-		System.out.println("inside getStudByteacherIdController method");
+		log.info("inside getStudByteacherIdController method");
 		try {
 			return studentBasicDetailsService.findStudentByTeacherIdService(teacherId);
 		} catch (Exception e) {
-			System.out.println("Exception caught" + e);
+			log.error(e.toString());
 		}
 
 		return null;
@@ -78,12 +82,12 @@ public class StudentBasicDetailsJPA {
 	@ResponseBody
 	@RequestMapping(value = "getAllStud")
 	public List<StudentBasicDetails> getAllStudentController() {
-		System.out.println("inside getAllStudentController method");
+		log.info("inside getAllStudentController method");
 
 		try {
 			return studentBasicDetailsService.findAllStudentsService();
 		} catch (Exception e) {
-			System.out.println("Exception caught" + e);
+			log.error("Exception caught" + e.toString());
 		}
 
 		return null;
