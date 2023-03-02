@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class StudentBasicDetailsJPA {
 	
 	final Logger log = LoggerFactory.getLogger(StudentBasicDetailsJPA.class);
-
+ 
 	@Autowired
 	private StudentBasicDetailsService studentBasicDetailsService;
 
